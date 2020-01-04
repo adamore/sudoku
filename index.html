@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Anthony Damore: Sudoku">
+    <meta name="application-name" content="Anthony Damore: Sudoku">
+    <meta name="theme-color" content="#000000">
+    <meta name="author" content="Anthony Damore">
+    <link rel="canonical" href="https://anthonydamore.com/sudoku">
+    <link rel="shortcut icon" href="img/sudoku.png" />
+    <link rel="apple-touch-icon" href="img/sudoku.png" sizes="180x180">
+    <link rel="icon" type="image/png" href="img/sudoku.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="img/sudoku.png" sizes="16x16">
+    <meta property="og:image" content="img/sudoku.png">
+    <link rel="mask-icon" href="img/sudoku.png" color="#000000">
+    <meta property="og:site_name" content="Anthony Damore: Sudoku">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="https://anthonydamore.com/sudoku">
+    <meta property="og:title" content="Anthony Damore: Sudoku">
+    <meta property="og:description" content="Anthony Damore: Sudoku, Student &amp; Developer">
+    <meta property="og:type" content="website">
+    <meta property="og:image:width" content="600">
+    <meta property="og:image:height" content="400">
+    <title>Anthony Damore: Sudoku</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="jquery.js"></script>
+    <script src="sudoku.js"></script>
+    <script src="solver.js"></script>
+</head>
+
+<body>
+    <div class="content">
+        <center>
+            <h1>Sudoku Game & Solver</h1>
+            <table id="grid" class="puzzle" border="1">
+                <tr>
+                    <td> <input id="cell-A1" class="cell" type="text"></td>
+                    <td> <input id="cell-B1" class="cell" type="text"></td>
+                    <td> <input id="cell-C1" class="cell" type="text"></td>
+                    <td> <input id="cell-D1" class="cell" type="text"></td>
+                    <td> <input id="cell-E1" class="cell" type="text"></td>
+                    <td> <input id="cell-F1" class="cell" type="text"></td>
+                    <td> <input id="cell-G1" class="cell" type="text"></td>
+                    <td> <input id="cell-H1" class="cell" type="text"></td>
+                    <td> <input id="cell-I1" class="cell" type="text"></td>
+                </tr>
+                <tr>
+                    <td> <input id="cell-A2" class="cell" type="text"></td>
+                    <td> <input id="cell-B2" class="cell" type="text"></td>
+                    <td> <input id="cell-C2" class="cell" type="text"></td>
+                    <td> <input id="cell-D2" class="cell" type="text"></td>
+                    <td> <input id="cell-E2" class="cell" type="text"></td>
+                    <td> <input id="cell-F2" class="cell" type="text"></td>
+                    <td> <input id="cell-G2" class="cell" type="text"></td>
+                    <td> <input id="cell-H2" class="cell" type="text"></td>
+                    <td> <input id="cell-I2" class="cell" type="text"></td>
+                </tr>
+                <tr>
+                    <td> <input id="cell-A3" class="cell" type="text"></td>
+                    <td> <input id="cell-B3" class="cell" type="text"></td>
+                    <td> <input id="cell-C3" class="cell" type="text"></td>
+                    <td> <input id="cell-D3" class="cell" type="text"></td>
+                    <td> <input id="cell-E3" class="cell" type="text"></td>
+                    <td> <input id="cell-F3" class="cell" type="text"></td>
+                    <td> <input id="cell-G3" class="cell" type="text"></td>
+                    <td> <input id="cell-H3" class="cell" type="text"></td>
+                    <td> <input id="cell-I3" class="cell" type="text"></td>
+                </tr>
+                <tr>
+                    <td> <input id="cell-A4" class="cell" type="text"></td>
+                    <td> <input id="cell-B4" class="cell" type="text"></td>
+                    <td> <input id="cell-C4" class="cell" type="text"></td>
+                    <td> <input id="cell-D4" class="cell" type="text"></td>
+                    <td> <input id="cell-E4" class="cell" type="text"></td>
+                    <td> <input id="cell-F4" class="cell" type="text"></td>
+                    <td> <input id="cell-G4" class="cell" type="text"></td>
+                    <td> <input id="cell-H4" class="cell" type="text"></td>
+                    <td> <input id="cell-I4" class="cell" type="text"></td>
+                </tr>
+                <tr>
+                    <td> <input id="cell-A5" class="cell" type="text"></td>
+                    <td> <input id="cell-B5" class="cell" type="text"></td>
+                    <td> <input id="cell-C5" class="cell" type="text"></td>
+                    <td> <input id="cell-D5" class="cell" type="text"></td>
+                    <td> <input id="cell-E5" class="cell" type="text"></td>
+                    <td> <input id="cell-F5" class="cell" type="text"></td>
+                    <td> <input id="cell-G5" class="cell" type="text"></td>
+                    <td> <input id="cell-H5" class="cell" type="text"></td>
+                    <td> <input id="cell-I5" class="cell" type="text"></td>
+                </tr>
+                <tr>
+                    <td> <input id="cell-A6" class="cell" type="text"></td>
+                    <td> <input id="cell-B6" class="cell" type="text"></td>
+                    <td> <input id="cell-C6" class="cell" type="text"></td>
+                    <td> <input id="cell-D6" class="cell" type="text"></td>
+                    <td> <input id="cell-E6" class="cell" type="text"></td>
+                    <td> <input id="cell-F6" class="cell" type="text"></td>
+                    <td> <input id="cell-G6" class="cell" type="text"></td>
+                    <td> <input id="cell-H6" class="cell" type="text"></td>
+                    <td> <input id="cell-I6" class="cell" type="text"></td>
+                </tr>
+                <tr>
+                    <td> <input id="cell-A7" class="cell" type="text"></td>
+                    <td> <input id="cell-B7" class="cell" type="text"></td>
+                    <td> <input id="cell-C7" class="cell" type="text"></td>
+                    <td> <input id="cell-D7" class="cell" type="text"></td>
+                    <td> <input id="cell-E7" class="cell" type="text"></td>
+                    <td> <input id="cell-F7" class="cell" type="text"></td>
+                    <td> <input id="cell-G7" class="cell" type="text"></td>
+                    <td> <input id="cell-H7" class="cell" type="text"></td>
+                    <td> <input id="cell-I7" class="cell" type="text"></td>
+                </tr>
+                <tr>
+                    <td> <input id="cell-A8" class="cell" type="text"></td>
+                    <td> <input id="cell-B8" class="cell" type="text"></td>
+                    <td> <input id="cell-C8" class="cell" type="text"></td>
+                    <td> <input id="cell-D8" class="cell" type="text"></td>
+                    <td> <input id="cell-E8" class="cell" type="text"></td>
+                    <td> <input id="cell-F8" class="cell" type="text"></td>
+                    <td> <input id="cell-G8" class="cell" type="text"></td>
+                    <td> <input id="cell-H8" class="cell" type="text"></td>
+                    <td> <input id="cell-I8" class="cell" type="text"></td>
+                </tr>
+                <tr>
+                    <td> <input id="cell-A9" class="cell" type="text"></td>
+                    <td> <input id="cell-B9" class="cell" type="text"></td>
+                    <td> <input id="cell-C9" class="cell" type="text"></td>
+                    <td> <input id="cell-D9" class="cell" type="text"></td>
+                    <td> <input id="cell-E9" class="cell" type="text"></td>
+                    <td> <input id="cell-F9" class="cell" type="text"></td>
+                    <td> <input id="cell-G9" class="cell" type="text"></td>
+                    <td> <input id="cell-H9" class="cell" type="text"></td>
+                    <td> <input id="cell-I9" class="cell" type="text"></td>
+                </tr>
+            </table>
+        </center>
+        <div class="buttons">
+            <button type="button" id="generate-button">New Game</button>
+            <button type="button" id="check-button">Check</button>
+            <button type="button" id="solve-button">Solve</button>
+        </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+
+</html>
