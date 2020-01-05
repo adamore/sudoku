@@ -1,4 +1,10 @@
 const cssCellPrefix = '#cell-';
+var difficultyToIntMap = {
+    'Very Easy': 1,
+    'Easy': 2,
+    'Medium': 4,
+    'Hard': 15,
+};
 
 function writeToDOM(givenPuzzle, answerPuzzle) {
     var colorForDisabled = 'grey';
@@ -59,13 +65,13 @@ $(document).ready(function() {
 
     $('#generate-button').bind('click', function() {
         clearDOMPuzzle();
-        puzzle = sudoku.generate('hard');
+        puzzle = generateGame(difficultyToIntMap[$('#difficulty').val()]);
         writeToDOM(puzzle);
     });
 
+
     $('#solve-button').bind('click', function() {
         var solvedPuzzle = solvePuzzle(puzzle);
-        //console.log(checkSol);
         writeToDOM(puzzle, solvedPuzzle);
     });
 

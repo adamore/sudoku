@@ -51,9 +51,11 @@ td {
 .content {
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 40%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+    width: 560px;
+    margin: 10px;
 }
 
 .buttons {
@@ -61,7 +63,8 @@ td {
     margin: 10px;
 }
 
-button {
+button,
+select {
     box-shadow: 3px 4px 0px 0px #899599;
     background: linear-gradient(to bottom, #ededed 5%, #bab1ba 100%);
     background-color: #ededed;
@@ -74,11 +77,14 @@ button {
     color: #1b5f70;
     font-family: Arial;
     font-size: 17px;
-    padding: 7px 25px;
+    padding: 7px 7px;
     text-decoration: none;
     text-shadow: 0px 1px 0px #e1e2ed;
-    min-width: 80px;
+    white-space: nowrap;
+    min-width: 120px;
 }
+
+
 
 button:hover {
     background: linear-gradient(to bottom, #bab1ba 5%, #ededed 100%);
