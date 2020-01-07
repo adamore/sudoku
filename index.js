@@ -165,6 +165,7 @@ function siteOpen() {
         var obj = $(cssCellPrefix + location);
         obj.val(userInput[location]);
     }
+    return originalPuzzle;
 }
 
 function setNewCookie(DOMPuzzle, originalPuzzle) {
@@ -221,7 +222,7 @@ $(document).ready(function() {
         setNewCookie(readPuzzleFromDOM(), puzzle, 2);
     });
     if (hasCookie('game')) {
-        siteOpen();
+        puzzle = siteOpen();
     } else {
         $('#generate-button').click();
     }
