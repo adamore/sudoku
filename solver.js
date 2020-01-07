@@ -197,7 +197,6 @@ function generateGame(attempts) {
         length: 9
     }, () => new Array(9).fill(0));
     fillGrid(gameGrid);
-
     while (attempts > 0) {
         var row, col;
         do {
@@ -225,7 +224,6 @@ function generateGame(attempts) {
             }
         }
     }
-    //console.table(gameGrid);
     return puzzleObj;
 
 }
