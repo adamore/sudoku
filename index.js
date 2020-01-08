@@ -4,14 +4,14 @@ const textColorForValid = 'black';
 const textColorForInvalid = 'white';
 const backgroundColorForDisabled = 'grey';
 const backgroundColorForValid = 'lightgreen';
-const backgroundColorForInvalid = 'red';
-const backgroundColorForEmpty = '#f5ebeb';
+const backgroundColorForInvalid = 'lightred';
+const backgroundColorForEmpty = 'white';
 
 var difficultyToIntMap = {
     'Very Easy': 2,
     'Easy': 5,
     'Medium': 10,
-    'Hard': 20,
+    'Hard': 15,
 };
 
 function writeToDOM(givenPuzzle, answerPuzzle) {
@@ -129,15 +129,15 @@ function setCookie(name, value, days) {
     if (days) {
         var date = new Date();
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        expires = "; expires=" + date.toGMTString();
+        expires = '; expires=' + date.toGMTString();
     } else {
-        expires = "";
+        expires = '';
     }
-    document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value) + expires + "; path=/";
+    document.cookie = encodeURIComponent(name) + '=' + encodeURIComponent(value) + expires + '; path=/';
 }
 
 function getCookie(name) {
-    var nameEQ = encodeURIComponent(name) + "=";
+    var nameEQ = encodeURIComponent(name) + '=';
     var ca = document.cookie.split(';');
     for (var i = 0; i < ca.length; i++) {
         var c = ca[i];
@@ -152,10 +152,10 @@ function hasCookie(name) {
 }
 
 function eraseCookie(name) {
-    setCookie(name, "", -1);
+    setCookie(name, '', -1);
 }
 
-function siteOpen() {
+function loadGameFromCookie() {
     var cookie = getCookie('game');
     var cookieContents = JSON.parse(cookie);
     var userInput = cookieContents['user'];
@@ -177,6 +177,11 @@ function setNewCookie(DOMPuzzle, originalPuzzle) {
 }
 
 $(document).ready(function() {
+    if (hasCookie('game')) {
+        puzzle = loadGameFromCookie();
+    } else {
+        $('#generate-button').click();
+    }
     $('.cell').focusout(function() {
         if (!$.isNumeric($(this).val())) {
             $(this).val('');
@@ -212,18 +217,13 @@ $(document).ready(function() {
         updateDOMWithCheckedPuzzle(invalidLocations, puzzle);
     });
 
-    $("input").on('change paste keyup', function() {
+    $('input').on('change paste keyup', function() {
         $(this).css({
             'background-color': backgroundColorForEmpty,
             'color': textColorForValid
         });
     });
-    $("input").on('change paste keyup', function() {
+    $('input').on('change paste keyup', function() {
         setNewCookie(readPuzzleFromDOM(), puzzle, 2);
     });
-    if (hasCookie('game')) {
-        puzzle = siteOpen();
-    } else {
-        $('#generate-button').click();
-    }
 });
