@@ -1,10 +1,10 @@
 const cssCellPrefix = '#cell-';
 const textColorForDisabled = 'white';
 const textColorForValid = 'black';
-const textColorForInvalid = 'white';
+const textColorForInvalid = 'black';
 const backgroundColorForDisabled = 'grey';
 const backgroundColorForValid = 'lightgreen';
-const backgroundColorForInvalid = 'lightred';
+const backgroundColorForInvalid = '#ffcccb';
 const backgroundColorForEmpty = 'white';
 
 var difficultyToIntMap = {
@@ -72,7 +72,6 @@ function clearDOMPuzzle() {
     }
 }
 
-// DO THIS
 function updateDOMWithCheckedPuzzle(invalidLocations, puzzle) {
     var solvedPuzzle = solvePuzzle(puzzle);
     for (var r = 0; r < 9; r++) {
@@ -168,12 +167,21 @@ function loadGameFromCookie() {
     return originalPuzzle;
 }
 
+var gamesaveTimeout;
+
 function setNewCookie(DOMPuzzle, originalPuzzle) {
+    clearTimeout(gamesaveTimeout);
+
     if (hasCookie('game')) {
         eraseCookie('game');
     }
     var cookieObj = createCookieJSON(DOMPuzzle, originalPuzzle);
     setCookie('game', cookieObj, 2);
+
+    $('#saved').removeClass('hidden');
+    gamesaveTimeout = setTimeout(function() {
+        $('#saved').addClass('hidden');
+    }, 1000);
 }
 
 $(document).ready(function() {
@@ -194,6 +202,9 @@ $(document).ready(function() {
         clearDOMPuzzle();
         puzzle = generateGame(difficultyToIntMap[$('#difficulty').val()]);
         writeToDOM(puzzle);
+        if (hasCookie('game')) {
+            eraseCookie('game');
+        }
     });
 
     $('#clear-button').bind('click', function() {
@@ -211,6 +222,8 @@ $(document).ready(function() {
     $('#check-button').bind('click', function() {
         var DOMPuzzle = readPuzzleFromDOM();
         var invalidLocations = getInvalidLocations(DOMPuzzle, puzzle);
+        console.log(DOMPuzzle);
+        console.log(invalidLocations);
         updateDOMWithCheckedPuzzle(invalidLocations, puzzle);
     });
 
