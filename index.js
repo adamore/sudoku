@@ -219,8 +219,6 @@ $(document).ready(function() {
             'background-color': backgroundColorForEmpty,
             'color': textColorForValid
         });
-    });
-    $('input').on('change paste keyup', function() {
         setNewCookie(readPuzzleFromDOM(), puzzle, 2);
     });
 
