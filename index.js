@@ -199,6 +199,7 @@ $(document).ready(function() {
     $('#clear-button').bind('click', function() {
         clearDOMPuzzle();
         writeToDOM(puzzle);
+        eraseCookie('game');
     });
 
     $('#solve-button').bind('click', function() {
