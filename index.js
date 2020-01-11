@@ -148,7 +148,7 @@ function getCookie(name) {
 }
 
 function hasCookie(name) {
-    return (getCookie(name) != null);
+    return (getCookie(name) !== null);
 }
 
 function eraseCookie(name) {
@@ -177,11 +177,6 @@ function setNewCookie(DOMPuzzle, originalPuzzle) {
 }
 
 $(document).ready(function() {
-    if (hasCookie('game')) {
-        puzzle = loadGameFromCookie();
-    } else {
-        $('#generate-button').click();
-    }
     $('.cell').focusout(function() {
         if (!$.isNumeric($(this).val())) {
             $(this).val('');
@@ -209,6 +204,7 @@ $(document).ready(function() {
     $('#solve-button').bind('click', function() {
         var solvedPuzzle = solvePuzzle(puzzle);
         writeToDOM(puzzle, solvedPuzzle);
+        eraseCookie('game');
     });
 
     $('#check-button').bind('click', function() {
@@ -226,4 +222,10 @@ $(document).ready(function() {
     $('input').on('change paste keyup', function() {
         setNewCookie(readPuzzleFromDOM(), puzzle, 2);
     });
+
+    if (hasCookie('game')) {
+        puzzle = loadGameFromCookie();
+    } else {
+        $('#generate-button').click();
+    }
 });
